@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.get("/users", async (req, res) => {
+app.get("/topUsers", async (req, res) => {
   const bestUsers = await User.findAll({
     order: [["timesWon", "DESC"]],
     limit: 10,
@@ -56,7 +56,7 @@ app.get("/users", async (req, res) => {
   let users = [];
 
   bestUsers.forEach((user) => {
-    users.push(user.dataValues.userName);
+    users.push({userName: user.dataValues.userName, timesWon: user.dataValues.timesWon});
   });
   res.status(200).json(users);
  });

@@ -1,8 +1,8 @@
-import { Links } from "@remix-run/react";
-import styles from "../assets/css/global.css";
+import { Link } from "@remix-run/react"
+import globalStyles from "../assets/css/global.css";
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }];
+  return [{ rel: "stylesheet", href: globalStyles }];
 }
 
 export const meta = () => {
@@ -12,8 +12,8 @@ export const meta = () => {
 export default function Index() {
   return (
     <div>
-      <button>Start Playing</button>
-      <button>High Scores</button>
+      <Link to="/game">Start Playing</Link>
+      <Link to="/highscores">High Scores</Link>
     </div>
   );
 }
