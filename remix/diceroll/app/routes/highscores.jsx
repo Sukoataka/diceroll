@@ -1,17 +1,35 @@
+import { useLoaderData } from "@remix-run/react";
+import { json } from "@remix-run/node";
 import styles from "../assets/css/global.css";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
 
-async function getHighscores() {
-  const topUsers = await fetch("http://localhost:5000/topusers").then((res) => res.json());
-  return topUsers;
+export async function loader() {
+  const topUsers = await fetch("http://localhost:5000/topusers").then((res) =>
+    res.json()
+  );
+  return json(topUsers);
 }
 
 //TODO: Fix this up, error 500, react: objects are not valid
-export default async function HighScores() {
-    const topUsers = await getHighscores();
-    console.log(topUsers);
-    return <div></div>;
+export default function HighScores() {
+  const topUsers = useLoaderData();
+
+  return (
+    <div>
+      <ul>
+        {topUsers.map((user) => {
+          return (
+            <li key={user.userID}>
+              <p>
+                {user.userName}: {user.timesWon}
+              </p>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 }
