@@ -98,6 +98,15 @@ app.post("/addUser", async (req, res) => {
   }
 });
 
+app.get("/getRandomNumbers", (req, res) => {
+  const randomNumber1 = Math.floor(Math.random() * 6) + 1;
+  let randomNumber2 = Math.floor(Math.random() * 6) + 1;
+  while (randomNumber1 === randomNumber2) {
+    randomNumber2 = Math.floor(Math.random() * 6) + 1;
+  }
+  res.status(200).json({ rNum1: randomNumber1, rNum2: randomNumber2 });
+})
+
 app.listen(process.env.PORT, () =>
   console.log(`Example app listening on port localhost:${process.env.PORT}!`)
 );

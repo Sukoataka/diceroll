@@ -1,24 +1,29 @@
 import styles from "../assets/css/global.css";
-import { useState } from "react";
+import { useLoaderData } from "@remix-run/react";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
 
-export default function Game() {
-  const [playersPushedButton, setPlayersPushedButton] = useState(false);
-  const [randomNumber1, setRandomNumber1] = useState(0);
-  const [randomNumber2, setRandomNumber2] = useState(0);
+export async function loader() {
+  const data = (await fetch("http://localhost:5000/getrandomnumbers")).json();
+  return data;
+}
 
-  //FIX THIS! too many re renders
-  setRandomNumber1(Math.floor(Math.random() * 6) + 1);
-  setRandomNumber2(Math.floor(Math.random() * 6) + 1);
+export default function Game() {
+  const data = useLoaderData();
+  const randomNumber1 = data.rNum1;
+  const randomNumber2 = data.rNum2;
+
+  let winner = 0;
+  if (randomNumber1 > randomNumber2) {
+    winner = 1;
+  } else {
+    winner = 2;
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(
-      JSON.stringify({ userName: document.getElementById("playerName").value })
-    );
 
     await fetch("http://localhost:5000/addUser", {
       method: "POST",
@@ -34,15 +39,9 @@ export default function Game() {
 
   return (
     <div className="game">
-      {playersPushedButton ? (
-        <div>
-          <h1>Waiting for both players to push their button...</h1>
-        </div>
-      ) : (
-        <div>
           <h1>Player 1 rolled: {randomNumber1}</h1>
           <h2>Player 2 rolled: {randomNumber2}</h2>
-          <h1>Player ? won!</h1>
+          <h1>Player {winner} won!</h1>
           <h2>
             The winner is?{" "}
             <form onSubmit={handleSubmit}>
@@ -54,8 +53,6 @@ export default function Game() {
               <input type="submit" value="Submit"></input>
             </form>
           </h2>
-        </div>
-      )}
     </div>
   );
 }

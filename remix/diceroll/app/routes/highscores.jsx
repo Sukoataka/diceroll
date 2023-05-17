@@ -13,7 +13,6 @@ export async function loader() {
   return json(topUsers);
 }
 
-//TODO: Fix this up, error 500, react: objects are not valid
 export default function HighScores() {
   const topUsers = useLoaderData();
 
