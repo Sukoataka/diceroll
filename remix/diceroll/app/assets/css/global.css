@@ -1,5 +1,81 @@
-body { 
-    background-image: url("../img/bg.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+
+body {
+  background-image: url("../img/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+a,
+button,
+input[type="submit"] {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.index a {
+  font-size: 50px !important;
+}
+.index {
+  margin-top: 45vh;
+  margin-left: -45vw;
+}
+
+.waitpage {
+    margin-left: -50vw;
+}
+
+.clicked {
+  background-color: yellow !important;
+}
+
+.waiting {
+  margin-top: 45vh;
+  height: 100px;
+  width: 150px;
+  margin-left: 12.5vw;
+}
+
+.highscorepage {
+    margin-left: -50vw;
+    margin-top: 20vh;
+}
+
+.highscorepage ul {
+    margin: 0px, 0px, 0px, 0px;
+    list-style-type: none !important;
+}
+
+.right {
+    margin-left: 2.5vw;
+}
+
+input[type="text"] {
+    height: 30px;
+    width: 200px;
+    background-color: yellow;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+a:hover,
+button:hover,
+input[type="submit"]:hover {
+  background-color: yellow !important;
+  cursor: pointer !important;
+}
+
+.game {
+  margin-left: -35vw;
+  margin-top: 30vh;
+  text-align: center;
 }

@@ -52,7 +52,7 @@ app.get("/topUsers", async (req, res) => {
   const bestUsers = await User.findAll({
     order: [["timesWon", "DESC"]],
     limit: 10,
-    attributes: ["userID", "userName", "timesWon"],
+    attributes: ["userName", "timesWon"],
   });
 
   let users = [];
@@ -108,5 +108,5 @@ app.get("/getRandomNumbers", (req, res) => {
 })
 
 app.listen(process.env.PORT, () =>
-  console.log(`Example app listening on port localhost:${process.env.PORT}!`)
+  console.log(`App listening on localhost:${process.env.PORT}!`)
 );

@@ -5,8 +5,10 @@ export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
 
+const url = "http://10.10.1.81:4000";
+
 export async function loader() {
-  const data = (await fetch("http://localhost:5000/getrandomnumbers")).json();
+  const data = (await fetch(`${url}/getrandomnumbers`)).json();
   return data;
 }
 
@@ -14,6 +16,8 @@ export default function Game() {
   const data = useLoaderData();
   const randomNumber1 = data.rNum1;
   const randomNumber2 = data.rNum2;
+
+  fetch(`http://10.10.1.81:5000/leds/${randomNumber1}/${randomNumber2}`);
 
   let winner = 0;
   if (randomNumber1 > randomNumber2) {
@@ -25,7 +29,7 @@ export default function Game() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    await fetch("http://localhost:5000/addUser", {
+    await fetch(`${url}/addUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -34,25 +38,21 @@ export default function Game() {
         userName: document.getElementById("playerName").value,
       }),
     });
-    location.href = "/success";
+    location.href = "/";
   }
 
   return (
     <div className="game">
-          <h1>Player 1 rolled: {randomNumber1}</h1>
-          <h2>Player 2 rolled: {randomNumber2}</h2>
-          <h1>Player {winner} won!</h1>
-          <h2>
-            The winner is?{" "}
-            <form onSubmit={handleSubmit}>
-              <input
-                id="playerName"
-                type="text"
-                placeholder="Your name"
-              ></input>
-              <input type="submit" value="Submit"></input>
-            </form>
-          </h2>
+      <h1>Speler {winner} is gewonnen!</h1>
+      <h2>Speler 1 rolde: {randomNumber1} ogen</h2>
+      <h2>Speler 2 rolde: {randomNumber2} ogen</h2>
+      <h1>
+        De winnaar is?
+        <form onSubmit={handleSubmit}>
+          <input id="playerName" type="text" placeholder="Jouw naam"></input>
+          <input type="submit" value="Doorgaan"></input>
+        </form>
+      </h1>
     </div>
   );
 }
