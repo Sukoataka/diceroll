@@ -5,7 +5,7 @@ export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
 
-const url = "http://10.10.1.81:4000";
+const url = "http://192.168.20.150:4000";
 
 export async function loader() {
   const data = (await fetch(`${url}/getrandomnumbers`)).json();
@@ -17,7 +17,7 @@ export default function Game() {
   const randomNumber1 = data.rNum1;
   const randomNumber2 = data.rNum2;
 
-  fetch(`http://10.10.1.81:5000/leds/${randomNumber1}/${randomNumber2}`);
+  fetch(`http://192.168.20.150:5000/leds/${randomNumber1}/${randomNumber2}`);
 
   let winner = 0;
   if (randomNumber1 > randomNumber2) {

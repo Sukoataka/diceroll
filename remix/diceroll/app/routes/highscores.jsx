@@ -6,7 +6,7 @@ export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
 
-const url = "http://10.10.1.81:4000";
+const url = "http://192.168.20.150:4000";
 
 export async function loader() {
   const topUsers = await fetch(`${url}/topusers`).then((res) =>
@@ -26,7 +26,7 @@ export default function HighScores() {
           return (
             <li key={user.userID}>
               <h3>
-                {user.userName}: {user.timesWon}
+                {user.userName}: {user.timesWon} keer gewonnen
               </h3>
             </li>
           );

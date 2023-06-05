@@ -72,6 +72,7 @@ button:hover,
 input[type="submit"]:hover {
   background-color: yellow !important;
   cursor: pointer !important;
+  transform: scale(1.15);
 }
 
 .game {
