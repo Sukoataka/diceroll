@@ -107,6 +107,11 @@ app.get("/getRandomNumbers", (req, res) => {
   res.status(200).json({ rNum1: randomNumber1, rNum2: randomNumber2 });
 })
 
+app.get("/users", async (req, res) => {
+  const totalUsers = await User.count();
+  return res.status(200).json({totalUsers});
+})
+
 app.listen(process.env.PORT, () =>
   console.log(`App listening on localhost:${process.env.PORT}!`)
 );
